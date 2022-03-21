@@ -1,0 +1,11 @@
+.annotation-viewer {
+  height: calc(100vh - 160px);
+}
+
+.active-thumbnail {
+  border: 2px solid #83ea56;
+}
+
+.thumbnail {
+  cursor: pointer;
+}

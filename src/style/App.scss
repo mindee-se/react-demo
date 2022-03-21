@@ -1,0 +1,30 @@
+.App{
+    .area-dropzone{
+        outline:none !important;
+        height: calc(100vh - 120px);
+        .content-dropzone{
+            cursor: pointer;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            text-align: center;
+            padding-top: 100px;
+        }
+    }
+}
+
+input{
+    height: 50px;
+    border: 1px solid #F1F1F1;
+    border-radius: 5px;
+    width: 100%;
+    outline: none !important;
+    padding-left: 10px;
+    transition: 0.2s;
+}
+
+label{
+    font-size: 12px;
+    font-weight: bold;
+}

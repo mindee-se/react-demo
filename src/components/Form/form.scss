@@ -1,0 +1,22 @@
+.form-container {
+  max-height: calc(100vh - 200px);
+  border-radius: 5px;
+}
+
+input.active-feature {
+  border: 8px solid #e74d61;
+  font-weight: bold;
+  color: #e74d61 !important;
+}
+
+tr.active-feature {
+  border-left: 4px solid #e74d61;
+  font-weight: bold;
+  color: #e74d61 !important;
+}
+
+.totals > td {
+  background: white;
+  border: none !important;
+  font-weight: bold;
+}
