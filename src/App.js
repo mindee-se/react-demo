@@ -43,7 +43,7 @@ function App() {
                 body: data
             };
 
-            fetch('http://localhost:8000/parse_doc', requestOptions)
+            fetch('http://localhost:8080/parse-doc', requestOptions)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data)
