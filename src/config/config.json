@@ -1,0 +1,25 @@
+{
+  "projectName": "Example",
+  "documentName": "invoice",
+  "uploadURL": "http://localhost:8080/parse-doc",
+  "fields": {
+    "definition": {
+      "locale": {"type": "locale"},
+      "total_incl": {"type": "field"},
+      "total_excl": {"type": "field"},
+      "invoice_date": {"type": "field"},
+      "invoice_number": {"type": "field"},
+      "due_date": {"type": "field"},
+      "taxes": {"type": "[:field]"},
+      "supplier": {"type": "field"},
+      "supplier_address": {"type": "field"},
+      "customer_name": {"type": "field"},
+      "customer_company_registration": {"type": "[:field]"},
+      "customer_address": {"type": "field"},
+      "payment_details": {"type": "[:field]"},
+      "company_number": {"type": "[:field]"},
+      "total_tax": {"type": "[:field]"},
+      "line_items": {"type": "[:lineItem]"}
+    }
+  }
+}
