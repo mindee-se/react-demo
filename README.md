@@ -1,6 +1,8 @@
 # Client Base for React
 
-Change the `./src/config/config.json` file.
+`cp ./src/config/config.example.json ./src/config/config.json`
+
+Edit the `./src/config/config.json` file.
 
 
 ## Available Scripts
