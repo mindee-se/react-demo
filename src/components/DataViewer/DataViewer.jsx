@@ -1,9 +1,9 @@
-import './form.scss'
+import './dataViewer.scss'
 import {useEffect, useState} from "react";
 import {Table} from "react-bootstrap";
 import loaderGIF from "../../assets/mindee-logo.gif"
 
-function Form({invoiceData, activeFeature}) {
+function DataViewer({invoiceData, activeFeature}) {
     const [line_items, setline_items] = useState(invoiceData)
     useEffect(() => {
         setline_items(invoiceData)
@@ -84,4 +84,4 @@ function Form({invoiceData, activeFeature}) {
     );
 }
 
-export default Form;
+export default DataViewer;

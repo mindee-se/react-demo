@@ -4,8 +4,8 @@ import Header from "./components/Header/Header";
 import Drop from "./components/Drop/Drop";
 import {useCallback, useEffect, useState} from "react";
 import {getImagesFromPDF} from "react-mindee-js";
-import Viewer from "./components/Viewer/Viewer";
-import Form from "./components/Form/Form";
+import DocViewer from "./components/DocViewer/DocViewer";
+import DataViewer from "./components/DataViewer/DataViewer";
 import loaderGIF from "./assets/mindee-logo.gif";
 import config from "./config/config";
 let Config = config.getConfig();
@@ -65,14 +65,14 @@ function App() {
             {images.length > 0 && <>
                 <div className={"p-3"}>
                     <div className="row">
-                        <Viewer
+                        <DocViewer
                             onShapeMouseEntered={onShapeMouseEntered}
                             images={images}
                             shapes={shapes}
                             onShapeMouseLeft={onShapeMouseLeft}
                         />
                         {
-                            loaded ? <Form
+                            loaded ? <DataViewer
                                 activeFeature={activeFeature}
                                 invoiceData={invoiceData}
                             />
