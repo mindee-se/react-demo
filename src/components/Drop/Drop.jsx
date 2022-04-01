@@ -1,6 +1,8 @@
 import './drop.scss'
 import placeholder from "../../assets/placeholder.svg";
 import {useDropzone} from "react-dropzone";
+import config from "../../config/config";
+let Config = config.getConfig();
 
 function Drop({onDrop}) {
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -15,7 +17,7 @@ function Drop({onDrop}) {
                         </p> :
                         <p>
                             <img src={placeholder} alt=""/> <br/><br/>
-                            Upload an invoice.
+                            Upload an {Config.documentName}.
                         </p>
                 }
             </div>

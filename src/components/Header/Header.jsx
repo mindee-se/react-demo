@@ -1,13 +1,20 @@
 import './header.scss'
-import logo from '../../assets/logo.png'
+import config from "../../config/config";
+let Config = config.getConfig();
 
 function Header() {
     return (
         <div className="header">
             <div className="content">
-                <div className="logo">
-                    <img src={logo} alt=""/>
-                </div>
+                {Config.logoURL ?
+                    <div className="project">
+                        <img src={Config.logoURL} alt=""/>
+                    </div>
+                    :
+                    <div className="project">
+                        <h3>{Config.projectName}</h3>
+                    </div>
+                }
             </div>
         </div>
     );

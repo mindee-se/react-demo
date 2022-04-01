@@ -1,0 +1,112 @@
+{
+  "projectName": "Example Project",
+  "documentName": "example doc",
+  "logoURL": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Example_title.png",
+  "uploadURL": "http://localhost:8080/parse-doc",
+  "fields": {
+    "definition": {
+      "locale": {
+        "type": "locale",
+        "name": "Locale"
+      },
+      "total_incl": {
+        "type": "field",
+        "name": "Total (w. tax)"
+      },
+      "total_excl": {
+        "type": "field",
+        "name": "Total (w/o tax)"
+      },
+      "invoice_date": {
+        "type": "field",
+        "name": "Date"
+      },
+      "invoice_number": {
+        "type": "field",
+        "name": "Number"
+      },
+      "due_date": {
+        "type": "field",
+        "name": "Due"
+      },
+      "taxes": {
+        "type": "[:field]",
+        "name": "Taxes"
+      },
+      "supplier": {
+        "type": "field",
+        "name": "Supplier"
+      },
+      "supplier_address": {
+        "type": "field",
+        "name": "Locale"
+      },
+      "customer_name": {
+        "type": "field",
+        "name": "Customer"
+      },
+      "customer_company_registration": {
+        "type": "field",
+        "name": "Customer Registration"
+      },
+      "customer_address": {
+        "type": "field",
+        "name": "Customer Address"
+      },
+      "payment_details": {
+        "type": "[:field]",
+        "name": "Payment Info"
+      },
+      "company_number": {
+        "type": "[:field]",
+        "name": "Company Numbers"
+      },
+      "total_tax": {
+        "type": "field",
+        "name": "Total Tax"
+      },
+      "line_items": {
+        "type": "[:lineItem]",
+        "name": "Locale",
+        "columns": {
+          "item_id": {
+            "name": "Item"
+          },
+          "description": {
+            "name": "Description"
+          },
+          "size_unit": {
+            "name": "Price Unit"
+          },
+          "quantity": {
+            "name": "QTY"
+          },
+          "unit_price": {
+            "name": "Unit Price"
+          },
+          "price_amount": {
+            "name": "Total Price"
+          },
+          "discount": {
+            "name": "Discount"
+          },
+          "deposit": {
+            "name": "Deposit"
+          },
+          "pack_size": {
+            "name": "Pack Size"
+          },
+          "brand": {
+            "name": "Brand"
+          },
+          "sku": {
+            "name": "SKU"
+          },
+          "upc": {
+            "name": "UPC"
+          }
+        }
+      }
+    }
+  }
+}

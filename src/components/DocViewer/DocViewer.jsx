@@ -1,4 +1,4 @@
-import './viewer.scss'
+import './docViewer.scss'
 import {AnnotationViewer} from "react-mindee-js";
 import {useState} from "react";
 
@@ -9,7 +9,7 @@ const thumbnailStyle = {
     marginBottom: 5,
 }
 
-function Viewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
+function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
         <div className="col-md-4">
@@ -52,4 +52,4 @@ function Viewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
     );
 }
 
-export default Viewer;
+export default DocViewer;

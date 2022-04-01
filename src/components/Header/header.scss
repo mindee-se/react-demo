@@ -1,9 +1,7 @@
 .header {
-  padding: 20px;
   line-height: 70px;
 
   .content {
-    height: 80px;
     border-bottom: 1px solid #D1D1D1;
 
     h1 {
@@ -12,11 +10,14 @@
       display: inline-block;
     }
 
-    .logo {
+    .project {
       text-align: center;
 
       img {
         height: 30px;
+      }
+      h3 {
+        margin-top: 8px;
       }
     }
   }
