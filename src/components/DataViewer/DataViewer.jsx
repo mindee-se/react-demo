@@ -14,15 +14,16 @@ function renderField(key, fieldObj, activeFeature) {
         </div>
     } else if (fieldDef.type === "[:field]") {
         return <div className="row">
+            <b>{fieldDef.name}:</b>
             {fieldObj.map((obj, k) =>
-                <div className="docField col">
-                    <b>{k}:</b> {obj.value}
-                </div>
+                <li>
+                    {obj.value}
+                </li>
             )}
         </div>
     } else if (fieldDef.type === "locale") {
         return <div className="docField">
-            <b>{fieldDef.name}:</b> {fieldObj.value}
+            <b>{fieldDef.name}:</b> {fieldObj.value} - {fieldObj.currency}
         </div>
     } else if (fieldDef.type === "[:lineItem]") {
         return renderLineItems(fieldObj, fieldDef, activeFeature)

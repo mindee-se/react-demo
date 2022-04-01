@@ -54,11 +54,11 @@
       },
       "payment_details": {
         "type": "[:field]",
-        "name": "Payment"
+        "name": "Payment Info"
       },
       "company_number": {
         "type": "[:field]",
-        "name": "Company Number"
+        "name": "Company Numbers"
       },
       "total_tax": {
         "type": "field",
