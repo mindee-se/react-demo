@@ -13,7 +13,7 @@ let Config = config.getConfig();
 function App() {
     const [files, setFiles] = useState([])
     const [images, setImages] = useState([])
-    const [invoiceData, setInvoiceData] = useState(config.getInitialFields())
+    const [documentData, setdocumentData] = useState(config.getInitialFields())
     const [shapes, setShapes] = useState([])
     const [loaded, setLoaded] = useState(false)
     const [activeFeature, setActiveFeature] = useState("")
@@ -33,7 +33,7 @@ function App() {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data)
-                    setInvoiceData(data)
+                    setdocumentData(data)
                     setShapes(
                         [
                             data.line_items
@@ -74,7 +74,7 @@ function App() {
                         {
                             loaded ? <DataViewer
                                 activeFeature={activeFeature}
-                                invoiceData={invoiceData}
+                                documentData={documentData}
                             />
                                 :
                                 <div
