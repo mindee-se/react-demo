@@ -1,6 +1,7 @@
 {
-  "projectName": "Example",
-  "documentName": "invoice",
+  "projectName": "Example Project",
+  "documentName": "example doc",
+  "logoURL": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Example_title.png",
   "uploadURL": "http://localhost:8080/parse-doc",
   "fields": {
     "definition": {

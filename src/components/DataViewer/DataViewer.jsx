@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {Table} from "react-bootstrap";
 import loaderGIF from "../../assets/mindee-logo.gif"
 import config from "../../config/config";
-
 let Config = config.getConfig();
 
 function renderField(key, fieldObj, activeFeature) {
