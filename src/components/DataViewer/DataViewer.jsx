@@ -32,7 +32,7 @@ function renderField(key, fieldObj, activeFeature) {
     }
 }
 
-function renderLineItems(line_items, fieldDef, activeFeature) {
+function renderLineItems(lineItems, fieldDef, activeFeature) {
     return <Table className="lineItems mt-1" striped bordered hover>
         <thead>
         <tr>
@@ -42,7 +42,7 @@ function renderLineItems(line_items, fieldDef, activeFeature) {
         </tr>
         </thead>
         <tbody>
-        {line_items.map((obj, k) =>
+        {lineItems.map((obj, k) =>
             <tr className={activeFeature === k ? "active-feature" : ""}>
                 {Object.keys(fieldDef.columns).map((key) => (
                     <td>{obj[key].value}</td>
