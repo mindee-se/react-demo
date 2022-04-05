@@ -34,9 +34,9 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
                                     polygon.draw()
                                 },
                                 shapeConfig: {
-                                    stroke: '#FFFF00',
+                                    stroke: '#ff0000',
                                     strokeWidth: 0,
-                                    fill: `#FFFF0010`,
+                                    fill: 'rgba(0,51,255,0.22)',
                                     listening: true,
                                 },
                             }}

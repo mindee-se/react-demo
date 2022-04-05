@@ -8,7 +8,7 @@ let Config = config.getConfig();
 function renderField(key, fieldObj, activeFeature) {
     let fieldDef = Config.fields.definition[key];
     if (fieldDef.type === "field") {
-        return <div className="docField">
+        return <div className={activeFeature === key ? "field active" : "field"}>
             <b>{fieldDef.name}:</b> {fieldObj.value ? fieldObj.value : <em>none</em>}
         </div>
     } else if (fieldDef.type === "[:field]") {
@@ -21,11 +21,11 @@ function renderField(key, fieldObj, activeFeature) {
             )}
         </div>
     } else if (fieldDef.type === "locale") {
-        return <div className="docField">
+        return <div className={activeFeature === key ? "field active" : "field"}>
             <b>{fieldDef.name}:</b> {fieldObj.value} - {fieldObj.currency}
         </div>
     } else if (fieldDef.type === "[:lineItem]") {
-        return <div>
+        return <div className="line-items">
             {fieldDef.name ? <b>{fieldDef.name}:</b> : ""}
             {renderLineItems(fieldObj, fieldDef, activeFeature)}
         </div>
@@ -42,8 +42,8 @@ function renderLineItems(lineItems, fieldDef, activeFeature) {
         </tr>
         </thead>
         <tbody>
-        {lineItems.map((obj, k) =>
-            <tr className={activeFeature === k ? "active-feature" : ""}>
+        {lineItems.map((obj, idx) =>
+            <tr className={activeFeature === `line-${idx}` ? "line-item active" : "line-item"}>
                 {Object.keys(fieldDef.columns).map((key) => (
                     <td>{obj[key].value}</td>
                 ))}
@@ -69,7 +69,7 @@ function DataViewer({documentData, activeFeature}) {
                     </div>
                     :
                     <div>
-                        <img src={loaderGIF} alt=""/>
+                        <img src={loaderGIF} alt="loading ..."/>
                     </div>
             }
         </div>

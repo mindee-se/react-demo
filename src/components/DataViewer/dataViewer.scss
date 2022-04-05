@@ -4,14 +4,24 @@
   overflow-y: auto;
 }
 
-input.active-feature {
-  border: 8px solid #e74d61;
-  font-weight: bold;
-  color: #e74d61 !important;
+div.field {
+  border-left: 4px solid white;
+  padding-left: 1px;
 }
 
-tr.active-feature {
+div.field.active {
   border-left: 4px solid #e74d61;
-  font-weight: bold;
-  color: #e74d61 !important;
+}
+
+div.line-items {
+  margin-left: 5px;
+}
+
+tr.line-item > td:first-child {
+  padding-left: 4px;
+}
+
+tr.line-item.active > td:first-child {
+  border-left: 4px solid #e74d61;
+  padding-left: 3px;
 }

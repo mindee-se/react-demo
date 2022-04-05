@@ -10,6 +10,26 @@ import loaderGIF from "./assets/mindee-logo.gif";
 import config from "./config/config";
 let Config = config.getConfig();
 
+function makeShapes(data) {
+    let shapes = []
+    for (const [key, fieldObj] of Object.entries(data)) {
+        if (fieldObj.coordinates) {
+            shapes.push({id: key, coordinates: fieldObj.coordinates})
+        }
+        if (Array.isArray(fieldObj)) {
+            for (const [idx, line] of fieldObj.entries()) {
+                if (line.coordinates) {
+                    shapes.push({
+                        id: `line-${idx}`,
+                        coordinates: line.coordinates
+                    })
+                }
+            }
+        }
+    }
+    return [shapes];
+}
+
 function App() {
     const [files, setFiles] = useState([])
     const [images, setImages] = useState([])
@@ -32,13 +52,8 @@ function App() {
             fetch(Config.uploadURL, requestOptions)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     setdocumentData(data)
-                    setShapes(
-                        [
-                            data.line_items
-                        ],
-                    )
+                    setShapes(makeShapes(data))
                     setLoaded(true)
                 });
         }
