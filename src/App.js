@@ -7,21 +7,27 @@ import {drawLayer, drawShape, getImagesFromPDF, setShapeConfig} from "react-mind
 import DocViewer from "./components/DocViewer/DocViewer";
 import DataViewer from "./components/DataViewer/DataViewer";
 import loaderGIF from "./assets/mindee-logo.gif";
-import config from "./config/config";
-let Config = config.getConfig();
 
 function makeShapes(data) {
     let shapes = []
     for (const [key, fieldObj] of Object.entries(data)) {
         if (fieldObj.coordinates) {
             shapes.push({id: key, coordinates: fieldObj.coordinates})
+        } else if (fieldObj.bbox) {
+            shapes.push({id: key, coordinates: fieldObj.bbox})
         }
         if (Array.isArray(fieldObj)) {
             for (const [idx, line] of fieldObj.entries()) {
+                let shapeId = `line-${idx}`;
                 if (line.coordinates) {
                     shapes.push({
-                        id: `line-${idx}`,
+                        id: shapeId,
                         coordinates: line.coordinates
+                    })
+                } else if (line.bbox) {
+                    shapes.push({
+                        id: shapeId,
+                        coordinates: line.bbox
                     })
                 }
             }
@@ -30,10 +36,10 @@ function makeShapes(data) {
     return [shapes];
 }
 
-function App() {
+function App({config}) {
     const [files, setFiles] = useState([])
     const [images, setImages] = useState([])
-    const [documentData, setdocumentData] = useState(config.getInitialFields())
+    const [documentData, setdocumentData] = useState({})
     const [shapes, setShapes] = useState([])
     const [loaded, setLoaded] = useState(false)
     const [activeFeature, setActiveFeature] = useState("")
@@ -55,7 +61,6 @@ function App() {
     };
 
     useEffect(() => {
-        document.title = Config.projectName + " Demo"
         // POST request using fetch inside useEffect React hook
         if (files.length > 0) {
             let data = new FormData()
@@ -65,7 +70,7 @@ function App() {
                 body: data
             };
 
-            fetch(Config.uploadURL, requestOptions)
+            fetch("http://localhost:8080/parse-doc", requestOptions)
                 .then(response => response.json())
                 .then(data => {
                     setdocumentData(data)
@@ -74,6 +79,7 @@ function App() {
                 });
         }
     }, [files]);
+
     const onDrop = useCallback(acceptedFiles => {
         let file = acceptedFiles[0]
         let urlFile = URL.createObjectURL(file)
@@ -96,10 +102,10 @@ function App() {
 
     return (
         <div className="App">
-            <Header/>
-            {files.length === 0 && <Drop onDrop={onDrop}/>}
+            <Header config={config}/>
+            {files.length === 0 && <Drop onDrop={onDrop} config={config}/>}
             {images.length > 0 && <>
-                <div className={"p-3"}>
+                <div id={"main-content"} className={"p-3"}>
                     <div className="row">
                         <DocViewer
                             onShapeMouseEntered={onShapeMouseEntered}
@@ -110,8 +116,9 @@ function App() {
                         />
                         {
                             loaded ? <DataViewer
-                                activeFeature={activeFeature}
                                 documentData={documentData}
+                                activeFeature={activeFeature}
+                                config={config}
                                 onFieldMouseEnter={onFieldMouseEnter}
                                 onFieldMouseLeave={onFieldMouseLeave}
                             />

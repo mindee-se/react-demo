@@ -1,10 +1,8 @@
 import './drop.scss'
 import placeholder from "../../assets/placeholder.svg";
 import {useDropzone} from "react-dropzone";
-import config from "../../config/config";
-let Config = config.getConfig();
 
-function Drop({onDrop}) {
+function Drop({onDrop, config}) {
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
     return (
@@ -15,10 +13,11 @@ function Drop({onDrop}) {
                     isDragActive ?
                         <p>
                         </p> :
-                        <p>
-                            <img src={placeholder} alt=""/> <br/><br/>
-                            Upload a file of type: {Config.documentName}
-                        </p>
+                        <div>
+                            <p><img src={placeholder} alt=""/></p>
+                            <p>Upload a document of type: <b>{config.documentName}</b></p>
+                            <p>File can be image or PDF</p>
+                        </div>
                 }
             </div>
         </div>

@@ -2,13 +2,6 @@ import './docViewer.scss'
 import {AnnotationViewer} from "react-mindee-js";
 import {useState} from "react";
 
-const thumbnailStyle = {
-    height: 50,
-    width: 50,
-    objectFit: "cover",
-    marginBottom: 5,
-}
-
 function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage}) {
     const [activeImage, setActiveImage] = useState(0)
     return (

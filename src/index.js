@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import configurator from "./config/config";
 import App from './App';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+let renderApp = async () => {
+    let config = await configurator.getConfig();
+    ReactDOM.render(
+      <React.StrictMode>
+        <App config={config} />
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+}
+renderApp();
