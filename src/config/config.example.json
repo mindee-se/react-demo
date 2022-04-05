@@ -67,16 +67,13 @@
       },
       "line_items": {
         "type": "[:lineItem]",
-        "name": "Locale",
+        "name": "Line Items",
         "columns": {
           "item_id": {
             "name": "Item"
           },
           "description": {
             "name": "Description"
-          },
-          "size_unit": {
-            "name": "Price Unit"
           },
           "quantity": {
             "name": "QTY"
@@ -86,21 +83,6 @@
           },
           "price_amount": {
             "name": "Total Price"
-          },
-          "discount": {
-            "name": "Discount"
-          },
-          "deposit": {
-            "name": "Deposit"
-          },
-          "pack_size": {
-            "name": "Pack Size"
-          },
-          "brand": {
-            "name": "Brand"
-          },
-          "sku": {
-            "name": "SKU"
           },
           "upc": {
             "name": "UPC"

@@ -25,12 +25,15 @@ function renderField(key, fieldObj, activeFeature) {
             <b>{fieldDef.name}:</b> {fieldObj.value} - {fieldObj.currency}
         </div>
     } else if (fieldDef.type === "[:lineItem]") {
-        return renderLineItems(fieldObj, fieldDef, activeFeature)
+        return <div>
+            {fieldDef.name ? <b>{fieldDef.name}:</b> : ""}
+            {renderLineItems(fieldObj, fieldDef, activeFeature)}
+        </div>
     }
 }
 
 function renderLineItems(line_items, fieldDef, activeFeature) {
-    return <Table className="lineItems mt-2" striped bordered hover>
+    return <Table className="lineItems mt-1" striped bordered hover>
         <thead>
         <tr>
             {Object.values(fieldDef.columns).map((def) => (
@@ -42,7 +45,7 @@ function renderLineItems(line_items, fieldDef, activeFeature) {
         {line_items.map((obj, k) =>
             <tr className={activeFeature === k ? "active-feature" : ""}>
                 {Object.keys(fieldDef.columns).map((key) => (
-                    <td>{obj[key].content}</td>
+                    <td>{obj[key].value}</td>
                 ))}
             </tr>
         )}
