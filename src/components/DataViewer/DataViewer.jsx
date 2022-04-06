@@ -8,11 +8,11 @@ let Config = config.getConfig();
 function renderField(key, fieldObj, activeFeature) {
     let fieldDef = Config.fields.definition[key];
     if (fieldDef.type === "field") {
-        return <div className={activeFeature === key ? "field active" : "field"}>
+        return <div id={key} className={activeFeature === key ? "field active" : "field"}>
             <b>{fieldDef.name}:</b> {fieldObj.value ? fieldObj.value : <em>none</em>}
         </div>
     } else if (fieldDef.type === "[:field]") {
-        return <div className="row">
+        return <div id={key} className="row">
             <b>{fieldDef.name}:</b>
             {fieldObj.map((obj, k) =>
                 <li>
@@ -21,7 +21,7 @@ function renderField(key, fieldObj, activeFeature) {
             )}
         </div>
     } else if (fieldDef.type === "locale") {
-        return <div className={activeFeature === key ? "field active" : "field"}>
+        return <div id={key} className={activeFeature === key ? "field active" : "field"}>
             <b>{fieldDef.name}:</b> {fieldObj.value} - {fieldObj.currency}
         </div>
     } else if (fieldDef.type === "[:lineItem]") {
@@ -43,7 +43,7 @@ function renderLineItems(lineItems, fieldDef, activeFeature) {
         </thead>
         <tbody>
         {lineItems.map((obj, idx) =>
-            <tr className={activeFeature === `line-${idx}` ? "line-item active" : "line-item"}>
+            <tr id={`line-${idx}`} className={activeFeature === `line-${idx}` ? "line-item active" : "line-item"}>
                 {Object.keys(fieldDef.columns).map((key) => (
                     <td>{obj[key].value}</td>
                 ))}

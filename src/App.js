@@ -59,10 +59,15 @@ function App() {
         }
     }, [files]);
     const onDrop = useCallback(acceptedFiles => {
-        let urlFile = URL.createObjectURL(acceptedFiles[0])
-        getImagesFromPDF(urlFile).then((_images) => {
-            setImages(_images)
-        })
+        let file = acceptedFiles[0]
+        let urlFile = URL.createObjectURL(file)
+        if (file.type === "application/pdf") {
+            getImagesFromPDF(urlFile).then((_images) => {
+                setImages(_images)
+            });
+        } else {
+            setImages([urlFile])
+        }
         setFiles(acceptedFiles)
     }, [])
 
