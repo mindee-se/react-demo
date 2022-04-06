@@ -33,7 +33,7 @@ function renderField(key, fieldObj, activeFeature) {
 }
 
 function renderLineItems(lineItems, fieldDef, activeFeature) {
-    return <Table className="lineItems mt-1" striped bordered hover>
+    return <Table className="lineItems mt-1" striped hover>
         <thead>
         <tr>
             {Object.values(fieldDef.columns).map((def) => (

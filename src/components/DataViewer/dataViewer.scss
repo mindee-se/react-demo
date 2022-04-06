@@ -18,10 +18,9 @@ div.line-items {
 }
 
 tr.line-item > td:first-child {
-  padding-left: 4px;
+  border-left: 4px solid white;
 }
 
 tr.line-item.active > td:first-child {
   border-left: 4px solid #e74d61;
-  padding-left: 3px;
 }
