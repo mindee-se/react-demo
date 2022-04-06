@@ -9,7 +9,7 @@ const thumbnailStyle = {
     marginBottom: 5,
 }
 
-function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
+function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
         <div className="col-md-4">
@@ -44,6 +44,7 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
                             data={{image: images[activeImage], shapes: shapes[activeImage]}}
                             onShapeMouseEnter={onShapeMouseEntered}
                             onShapeMouseLeave={onShapeMouseLeft}
+                            getStage={getStage}
                         />
                     }
                 </div>

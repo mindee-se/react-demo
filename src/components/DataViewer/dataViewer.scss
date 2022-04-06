@@ -9,7 +9,12 @@ div.field {
   padding-left: 1px;
 }
 
-div.field.active {
+div.empty-field {
+  border-left: 4px solid white;
+  padding-left: 1px;
+}
+
+div.field.active, div.field:hover {
   border-left: 4px solid #e74d61;
 }
 

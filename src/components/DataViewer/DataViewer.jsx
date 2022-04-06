@@ -5,10 +5,21 @@ import loaderGIF from "../../assets/mindee-logo.gif"
 import config from "../../config/config";
 let Config = config.getConfig();
 
-function renderField(key, fieldObj, activeFeature) {
+function renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMouseLeave) {
     let fieldDef = Config.fields.definition[key];
     if (fieldDef.type === "field") {
-        return <div id={key} className={activeFeature === key ? "field active" : "field"}>
+        let hclass;
+        if (fieldObj.value) {
+            hclass = "field";
+        } else {
+            hclass = "empty-field";
+        }
+        return <div
+                    id={key}
+                    className={activeFeature === key ? `${hclass} active` : hclass}
+                    onMouseEnter={() => onFieldMouseEnter(key)}
+                    onMouseLeave={() => onFieldMouseLeave(key)}
+        >
             <b>{fieldDef.name}:</b> {fieldObj.value ? fieldObj.value : <em>none</em>}
         </div>
     } else if (fieldDef.type === "[:field]") {
@@ -27,12 +38,12 @@ function renderField(key, fieldObj, activeFeature) {
     } else if (fieldDef.type === "[:lineItem]") {
         return <div className="line-items">
             {fieldDef.name ? <b>{fieldDef.name}:</b> : ""}
-            {renderLineItems(fieldObj, fieldDef, activeFeature)}
+            {renderLineItems(fieldObj, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave)}
         </div>
     }
 }
 
-function renderLineItems(lineItems, fieldDef, activeFeature) {
+function renderLineItems(lineItems, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave) {
     return <Table className="lineItems mt-1" striped hover>
         <thead>
         <tr>
@@ -43,7 +54,12 @@ function renderLineItems(lineItems, fieldDef, activeFeature) {
         </thead>
         <tbody>
         {lineItems.map((obj, idx) =>
-            <tr id={`line-${idx}`} className={activeFeature === `line-${idx}` ? "line-item active" : "line-item"}>
+            <tr
+                id={`line-${idx}`}
+                className={activeFeature === `line-${idx}` ? "line-item active" : "line-item"}
+                onMouseEnter={() => onFieldMouseEnter(`line-${idx}`)}
+                onMouseLeave={() => onFieldMouseLeave(`line-${idx}`)}
+            >
                 {Object.keys(fieldDef.columns).map((key) => (
                     <td>{obj[key].value}</td>
                 ))}
@@ -53,7 +69,7 @@ function renderLineItems(lineItems, fieldDef, activeFeature) {
     </Table>
 }
 
-function DataViewer({documentData, activeFeature}) {
+function DataViewer({documentData, activeFeature, onFieldMouseEnter, onFieldMouseLeave}) {
     const [line_items, setline_items] = useState(documentData)
     useEffect(() => {
         setline_items(documentData)
@@ -64,7 +80,7 @@ function DataViewer({documentData, activeFeature}) {
                 documentData ?
                     <div className="form-container pb-1">
                         {Object.entries(documentData).map(([key, fieldObj], idx) => (
-                            renderField(key, fieldObj, activeFeature)
+                            renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMouseLeave)
                         ))}
                     </div>
                     :

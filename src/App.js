@@ -2,8 +2,8 @@ import './style/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header/Header";
 import Drop from "./components/Drop/Drop";
-import {useCallback, useEffect, useState} from "react";
-import {getImagesFromPDF} from "react-mindee-js";
+import {useCallback, useEffect, useState, useRef} from "react";
+import {drawLayer, drawShape, getImagesFromPDF, setShapeConfig} from "react-mindee-js";
 import DocViewer from "./components/DocViewer/DocViewer";
 import DataViewer from "./components/DataViewer/DataViewer";
 import loaderGIF from "./assets/mindee-logo.gif";
@@ -37,6 +37,22 @@ function App() {
     const [shapes, setShapes] = useState([])
     const [loaded, setLoaded] = useState(false)
     const [activeFeature, setActiveFeature] = useState("")
+
+    const annotationViewerStageRef = useRef(null);
+    const setAnnotationViewerStage = (stage) => {
+        annotationViewerStageRef.current = stage;
+    };
+    const onFieldMouseEnter = (shapeId) => {
+        drawShape(annotationViewerStageRef.current, shapeId, {
+            fill: `#ff000040`
+        });
+    };
+    const onFieldMouseLeave = (shapeId) => {
+        setShapeConfig(annotationViewerStageRef.current, shapeId, {
+            fill: 'rgba(0,51,255,0.22)'
+        });
+        drawLayer(annotationViewerStageRef.current);
+    };
 
     useEffect(() => {
         document.title = Config.projectName + " Demo"
@@ -90,11 +106,14 @@ function App() {
                             images={images}
                             shapes={shapes}
                             onShapeMouseLeft={onShapeMouseLeft}
+                            getStage={setAnnotationViewerStage}
                         />
                         {
                             loaded ? <DataViewer
                                 activeFeature={activeFeature}
                                 documentData={documentData}
+                                onFieldMouseEnter={onFieldMouseEnter}
+                                onFieldMouseLeave={onFieldMouseLeave}
                             />
                                 :
                                 <div
