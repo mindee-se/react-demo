@@ -120,7 +120,7 @@ function App() {
                                     style={{
                                         position: "relative"
                                     }}
-                                    className="col-md-8 text-center">
+                                    className="col-md-6 text-center">
                                     <img
                                         style={{
                                             transform: "translateY(-50%)",

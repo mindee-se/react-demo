@@ -12,7 +12,7 @@ const thumbnailStyle = {
 function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
-        <div className="col-md-4">
+        <div className="col-md-5">
             <div className="row">
                 <div className="annotation-viewer col-md-12">
                     {

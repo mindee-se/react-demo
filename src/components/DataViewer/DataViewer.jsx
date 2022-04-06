@@ -10,9 +10,9 @@ function renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMou
     if (fieldDef.type === "field") {
         let hclass;
         if (fieldObj.value) {
-            hclass = "field";
+            hclass = "form-group row field";
         } else {
-            hclass = "empty-field";
+            hclass = "form-group row empty-field";
         }
         return <div
                     id={key}
@@ -20,7 +20,10 @@ function renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMou
                     onMouseEnter={() => onFieldMouseEnter(key)}
                     onMouseLeave={() => onFieldMouseLeave(key)}
         >
-            <b>{fieldDef.name}:</b> {fieldObj.value ? fieldObj.value : <em>none</em>}
+            <label className="col-sm-2 col-form-label">{fieldDef.name}</label>
+            <div className="col-sm-10">
+                <input type="text" className={"form-control form-control-sm"} value={fieldObj.value} />
+            </div>
         </div>
     } else if (fieldDef.type === "[:field]") {
         return <div id={key} className="row">
@@ -75,7 +78,7 @@ function DataViewer({documentData, activeFeature, onFieldMouseEnter, onFieldMous
         setline_items(documentData)
     }, [documentData])
     return (
-        <div className="col-md-8">
+        <div className="col-md-7">
             {
                 documentData ?
                     <div className="form-container pb-1">

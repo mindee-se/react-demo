@@ -4,28 +4,20 @@
   overflow-y: auto;
 }
 
-div.field {
-  border-left: 4px solid white;
-  padding-left: 1px;
-}
-
-div.empty-field {
-  border-left: 4px solid white;
-  padding-left: 1px;
+div.form-group {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
 }
 
 div.field.active, div.field:hover {
-  border-left: 4px solid #e74d61;
+  background: #ffb8c0;
 }
 
 div.line-items {
   margin-left: 5px;
 }
 
-tr.line-item > td:first-child {
-  border-left: 4px solid white;
-}
-
-tr.line-item.active > td:first-child {
-  border-left: 4px solid #e74d61;
+tr.line-item.active, tr.line-item:hover {
+  background: #ffb8c0;
 }
