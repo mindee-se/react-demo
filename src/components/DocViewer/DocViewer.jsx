@@ -9,10 +9,10 @@ const thumbnailStyle = {
     marginBottom: 5,
 }
 
-function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
+function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
-        <div className="col-md-4">
+        <div className="col-md-5">
             <div className="row">
                 <div className="annotation-viewer col-md-12">
                     {
@@ -34,9 +34,9 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
                                     polygon.draw()
                                 },
                                 shapeConfig: {
-                                    stroke: '#FFFF00',
+                                    stroke: '#ff0000',
                                     strokeWidth: 0,
-                                    fill: `#FFFF0010`,
+                                    fill: 'rgba(0,51,255,0.22)',
                                     listening: true,
                                 },
                             }}
@@ -44,6 +44,7 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft}) {
                             data={{image: images[activeImage], shapes: shapes[activeImage]}}
                             onShapeMouseEnter={onShapeMouseEntered}
                             onShapeMouseLeave={onShapeMouseLeft}
+                            getStage={getStage}
                         />
                     }
                 </div>

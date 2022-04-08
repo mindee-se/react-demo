@@ -17,7 +17,7 @@ function Drop({onDrop}) {
                         </p> :
                         <p>
                             <img src={placeholder} alt=""/> <br/><br/>
-                            Upload an {Config.documentName}.
+                            Upload a file of type: {Config.documentName}
                         </p>
                 }
             </div>

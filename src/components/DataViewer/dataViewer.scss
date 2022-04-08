@@ -4,14 +4,20 @@
   overflow-y: auto;
 }
 
-input.active-feature {
-  border: 8px solid #e74d61;
-  font-weight: bold;
-  color: #e74d61 !important;
+div.form-group {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
 }
 
-tr.active-feature {
-  border-left: 4px solid #e74d61;
-  font-weight: bold;
-  color: #e74d61 !important;
+div.field.active, div.field:hover {
+  background: #ffb8c0;
+}
+
+div.line-items {
+  margin-left: 5px;
+}
+
+tr.line-item.active, tr.line-item:hover {
+  background: #ffb8c0;
 }
