@@ -44,7 +44,6 @@ function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, 
 }
 
 function renderLineItems(lineItems, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave) {
-    console.log(lineItems)
     return <Table className="lineItems mt-1" striped hover>
         <thead>
         <tr>

@@ -1,5 +1,3 @@
-//import configJson from "./config.json";
-
 let configuration = null;
 
 async function getConfig() {
