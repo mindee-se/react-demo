@@ -2,14 +2,11 @@ import './dataViewer.scss'
 import {useEffect, useState} from "react";
 import {Table} from "react-bootstrap";
 import loaderGIF from "../../assets/mindee-logo.gif"
-import config from "../../config/config";
-let Config = config.getConfig();
 
-function renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMouseLeave) {
-    let fieldDef = Config.fields.definition[key];
+function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave) {
     if (fieldDef.type === "field") {
         let hclass;
-        if (fieldObj.value) {
+        if (fieldObj.value !== "") {
             hclass = "form-group row field";
         } else {
             hclass = "form-group row empty-field";
@@ -26,8 +23,8 @@ function renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMou
             </div>
         </div>
     } else if (fieldDef.type === "[:field]") {
-        return <div id={key} className="row">
-            <b>{fieldDef.name}:</b>
+        return <div id={key} className="form-group row">
+            <label className="col-sm-2 col-form-label">{fieldDef.name}</label>
             {fieldObj.map((obj, k) =>
                 <li>
                     {obj.value}
@@ -35,7 +32,7 @@ function renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMou
             )}
         </div>
     } else if (fieldDef.type === "locale") {
-        return <div id={key} className={activeFeature === key ? "field active" : "field"}>
+        return <div id={key}>
             <b>{fieldDef.name}:</b> {fieldObj.value} - {fieldObj.currency}
         </div>
     } else if (fieldDef.type === "[:lineItem]") {
@@ -63,16 +60,16 @@ function renderLineItems(lineItems, fieldDef, activeFeature, onFieldMouseEnter, 
                 onMouseEnter={() => onFieldMouseEnter(`line-${idx}`)}
                 onMouseLeave={() => onFieldMouseLeave(`line-${idx}`)}
             >
-                {Object.keys(fieldDef.columns).map((key) => (
-                    <td>{obj[key].value}</td>
-                ))}
+                {Object.keys(fieldDef.columns).map(function(key) {
+                    return <td>{obj[key].value}</td>
+                })}
             </tr>
         )}
         </tbody>
     </Table>
 }
 
-function DataViewer({documentData, activeFeature, onFieldMouseEnter, onFieldMouseLeave}) {
+function DataViewer({documentData, activeFeature, config, onFieldMouseEnter, onFieldMouseLeave}) {
     const [line_items, setline_items] = useState(documentData)
     useEffect(() => {
         setline_items(documentData)
@@ -82,9 +79,12 @@ function DataViewer({documentData, activeFeature, onFieldMouseEnter, onFieldMous
             {
                 documentData ?
                     <div className="form-container pb-1">
-                        {Object.entries(documentData).map(([key, fieldObj], idx) => (
-                            renderField(key, fieldObj, activeFeature, onFieldMouseEnter, onFieldMouseLeave)
-                        ))}
+                        {Object.entries(documentData).map( function([key, fieldObj], idx) {
+                            let fieldDef = config.fields[key];
+                            return renderField(
+                                key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave
+                            );
+                        })}
                     </div>
                     :
                     <div>

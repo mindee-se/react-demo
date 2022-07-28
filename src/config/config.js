@@ -1,45 +1,17 @@
-import configJson from "./config.json";
-
-const fieldTypes = {
-    "locale": {
-        "default": {"value": ""}
-    },
-    "field": {
-        "default": {"value": ""}
-    },
-    "[:field]": {
-        "default": []
-    },
-    "lineItem": {
-        "default": {"content": ""}
-    },
-    "[:lineItem]": {
-        "default": []
-    }
-};
-
 let configuration = null;
 
-function getInitialFields() {
-    let config = getConfig();
-    let initial = {};
-    for (const field in config["fields"]["definition"]) {
-        const fieldType = config["fields"]["definition"][field]["type"];
-        initial[field] = fieldTypes[fieldType]["default"];
+async function getConfig() {
+    let setConfig = async () => {
+        if (!configuration) {
+            let response = await fetch("http://localhost:8080/client-config");
+            configuration = await response.json();
+        }
     }
-    return initial;
-}
-
-function getConfig() {
-    if (configuration) {
-        return configuration;
-    }
-    configuration = configJson;
+    await setConfig();
     return configuration;
 }
 
 let configurator = {
-    getInitialFields,
     getConfig,
 };
 
