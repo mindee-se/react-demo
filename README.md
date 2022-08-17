@@ -14,11 +14,11 @@ This URL **must** return a JSON object having the following attributes:
   customerName: string
   documentName: string
   logoURL: string
-  fields: Object:
+  fields: Object
   {
-    type: string, one of "field", "[:lineItem]", "locale", 
+    type: string, one of "field", "[:field]", "[:lineItem]", "locale", 
     name: string
-    columns: Object:
+    columns: Object
     {
       <field_api_name>: {name: <field_display_name>}
     }
@@ -33,7 +33,16 @@ The App expects the following URL to be available for processing documents:
 This URL **must** return a JSON object having the following attributes:
 ```ts
 {
-
+  // "field"
+  <field_api_name>: Object
+  {
+    page_n: int
+    reconstructed: bool
+    value: number | string
+    confidence: float
+    polygon: [ [float, float] ]
+    bbox: [ [float, float] ]
+  }
 }
 ```
 
