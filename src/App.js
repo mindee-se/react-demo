@@ -53,10 +53,10 @@ function App({config}) {
     };
     const onFieldMouseEnter = (shapeId) => {
         drawShape(annotationViewerStageRef.current, shapeId, {
-            fill: config.hexaDefaultColor,
+            fill: config.fieldDefaultColor,
             opacity: 0.5
         });
-        document.getElementById(shapeId).style.background = config.hexaDefaultColor;
+        document.getElementById(shapeId).style.background = config.fieldDefaultColor;
         document.getElementById(shapeId).style.opacity = 0.5;
     };
     const onFieldMouseLeave = (shapeId) => {
@@ -121,7 +121,7 @@ function App({config}) {
                             shapes={shapes}
                             onShapeMouseLeft={onShapeMouseLeft}
                             getStage={setAnnotationViewerStage}
-                            hexaDefaultColor={config.hexaDefaultColor}
+                            fieldDefaultColor={config.fieldDefaultColor}
                         />
                         {
                             loaded ? <DataViewer

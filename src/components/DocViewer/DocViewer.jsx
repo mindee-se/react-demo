@@ -2,7 +2,7 @@ import './docViewer.scss'
 import {AnnotationViewer} from "react-mindee-js";
 import {useState} from "react";
 
-function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage, hexaDefaultColor}) {
+function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage, fieldDefaultColor}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
         <div className="col-md-5">
@@ -14,24 +14,22 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getSt
                             options={{
                                 enableSelection: false,
                                 selectionRectConfig: {
-                                    fill: hexaDefaultColor,
+                                    fill: fieldDefaultColor,
                                     opacity: 0.5
                                 },
                                 onMouseLeave: (polygon) => {
-                                    console.log(polygon)
                                     const layer = polygon.getLayer()
                                     polygon.setAttr('fill', 'transparent')
                                     layer?.batchDraw()
                                 },
                                 onMouseEnter: (polygon) => {
-                                    console.log(polygon)
-                                    const strokeColor = hexaDefaultColor
+                                    const strokeColor = fieldDefaultColor
                                     polygon.setAttr('fill', strokeColor)
-                                    polygon.setAttr('opacity', '0.5')
+                                    polygon.setAttr('opacity', 0.5)
                                     polygon.draw()
                                 },
                                 shapeConfig: {
-                                    stroke: hexaDefaultColor,
+                                    stroke: fieldDefaultColor,
                                     strokeWidth: 2,
                                     listening: true,
                                 },

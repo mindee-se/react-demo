@@ -5,7 +5,7 @@ async function getConfig() {
         if (!configuration) {
             let response = await fetch("http://localhost:8080/client-config");
             configuration = await response.json();
-            configuration.hexaDefaultColor = "#ff0000"
+            configuration.fieldDefaultColor = "#ff0000"
         }
     }
     await setConfig();
