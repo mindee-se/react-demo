@@ -22,14 +22,13 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getSt
                                     layer?.batchDraw()
                                 },
                                 onMouseEnter: (polygon) => {
-                                    const stroke = polygon.getAttr('stroke')
-                                    polygon.setAttr('fill', `${stroke}40`)
+                                    const strokeColor = polygon.getAttr('stroke')
+                                    polygon.setAttr('fill', `${strokeColor}40`)
                                     polygon.draw()
                                 },
                                 shapeConfig: {
                                     stroke: '#ff0000',
-                                    strokeWidth: 0,
-                                    fill: 'rgba(0,51,255,0.22)',
+                                    strokeWidth: 2,
                                     listening: true,
                                 },
                             }}
