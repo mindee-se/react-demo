@@ -5,15 +5,13 @@ import loaderGIF from "../../assets/mindee-logo.gif"
 
 function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave) {
     if (fieldDef.type === "field") {
-        let hclass;
-        if (fieldObj.value !== "") {
-            hclass = "form-group row field";
-        } else {
-            hclass = "form-group row empty-field";
+        let hClass = "form-group row field";
+        if (fieldObj.value === "") {
+            hClass += "-empty";
         }
         return <div
                     id={key}
-                    className={activeFeature === key ? `${hclass} active` : hclass}
+                    className={activeFeature === key ? `${hClass} active` : hClass}
                     onMouseEnter={() => onFieldMouseEnter(key)}
                     onMouseLeave={() => onFieldMouseLeave(key)}
         >
@@ -80,7 +78,7 @@ function DataViewer({documentData, activeFeature, config, onFieldMouseEnter, onF
                 documentData ?
                     <div className="form-container pb-1">
                         {Object.entries(documentData).map( function([key, fieldObj], idx) {
-                            let fieldDef = config.fields[key];
+                            const fieldDef = config.fields[key];
                             return renderField(
                                 key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave
                             );
