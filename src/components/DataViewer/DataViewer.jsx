@@ -15,8 +15,8 @@ function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, 
         return <div
                     id={key}
                     className={activeFeature === key ? `${hClass} active` : hClass}
-                    onMouseEnter={(e) => onFieldMouseEnter(e, key)}
-                    onMouseLeave={(e) => onFieldMouseLeave(e, key)}
+                    onMouseEnter={() => onFieldMouseEnter(key)}
+                    onMouseLeave={() => onFieldMouseLeave(key)}
         >
             <label className="col-sm-2 col-form-label">{fieldDef.name}</label>
             <div className="col-sm-10">

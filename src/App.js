@@ -51,19 +51,21 @@ function App({config}) {
     const setAnnotationViewerStage = (stage) => {
         annotationViewerStageRef.current = stage;
     };
-    const onFieldMouseEnter = (e, shapeId) => {
+    const onFieldMouseEnter = (shapeId) => {
         drawShape(annotationViewerStageRef.current, shapeId, {
-            fill: `#ff000040`
+            fill: config.hexaDefaultColor,
+            opacity: 0.5
         });
-        e.currentTarget.style.background = 'red';
+        document.getElementById(shapeId).style.background = config.hexaDefaultColor;
+        document.getElementById(shapeId).style.opacity = 0.5;
     };
-    const onFieldMouseLeave = (e, shapeId) => {
+    const onFieldMouseLeave = (shapeId) => {
         setShapeConfig(annotationViewerStageRef.current, shapeId, {
-            fill: 'rgba(0,51,255,0.22)'
+            fill: '',
         });
         drawLayer(annotationViewerStageRef.current);
-        e.currentTarget.style.background = '';
-        // document.getElementById(shapeId).style.background = '';
+        document.getElementById(shapeId).style.background = '';
+        document.getElementById(shapeId).style.opacity = 1;
     };
 
     useEffect(() => {
@@ -119,6 +121,7 @@ function App({config}) {
                             shapes={shapes}
                             onShapeMouseLeft={onShapeMouseLeft}
                             getStage={setAnnotationViewerStage}
+                            hexaDefaultColor={config.hexaDefaultColor}
                         />
                         {
                             loaded ? <DataViewer
