@@ -11,6 +11,9 @@ import loaderGIF from "./assets/mindee-logo.gif";
 function makeShapes(data) {
     let shapes = []
     for (const [key, fieldObj] of Object.entries(data)) {
+        if(fieldObj == null) {
+            continue;
+        }
         if (fieldObj.coordinates) {
             shapes.push({id: key, coordinates: fieldObj.coordinates})
         } else if (fieldObj.bbox) {
@@ -48,16 +51,19 @@ function App({config}) {
     const setAnnotationViewerStage = (stage) => {
         annotationViewerStageRef.current = stage;
     };
-    const onFieldMouseEnter = (shapeId) => {
+    const onFieldMouseEnter = (e, shapeId) => {
         drawShape(annotationViewerStageRef.current, shapeId, {
             fill: `#ff000040`
         });
+        e.currentTarget.style.background = 'red';
     };
-    const onFieldMouseLeave = (shapeId) => {
+    const onFieldMouseLeave = (e, shapeId) => {
         setShapeConfig(annotationViewerStageRef.current, shapeId, {
             fill: 'rgba(0,51,255,0.22)'
         });
         drawLayer(annotationViewerStageRef.current);
+        e.currentTarget.style.background = '';
+        // document.getElementById(shapeId).style.background = '';
     };
 
     useEffect(() => {

@@ -4,6 +4,9 @@ import {Table} from "react-bootstrap";
 import loaderGIF from "../../assets/mindee-logo.gif"
 
 function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave) {
+    if(fieldObj == null) {
+        return;
+    }
     if (fieldDef.type === "field") {
         let hClass = "form-group row field";
         if (fieldObj.value === "") {
@@ -12,8 +15,8 @@ function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, 
         return <div
                     id={key}
                     className={activeFeature === key ? `${hClass} active` : hClass}
-                    onMouseEnter={() => onFieldMouseEnter(key)}
-                    onMouseLeave={() => onFieldMouseLeave(key)}
+                    onMouseEnter={(e) => onFieldMouseEnter(e, key)}
+                    onMouseLeave={(e) => onFieldMouseLeave(e, key)}
         >
             <label className="col-sm-2 col-form-label">{fieldDef.name}</label>
             <div className="col-sm-10">
