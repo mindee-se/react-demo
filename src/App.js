@@ -8,16 +8,19 @@ import DocViewer from "./components/DocViewer/DocViewer";
 import DataViewer from "./components/DataViewer/DataViewer";
 import loaderGIF from "./assets/mindee-logo.gif";
 
-function makeShapes(data) {
+function makeShapes(data, defaultColor) {
     let shapes = []
     for (const [key, fieldObj] of Object.entries(data)) {
+
+        let currentFieldColor = defaultColor;
+
         if(fieldObj == null) {
             continue;
         }
         if (fieldObj.coordinates) {
-            shapes.push({id: key, coordinates: fieldObj.coordinates})
+            shapes.push({id: key, coordinates: fieldObj.coordinates, config: {opacity: 0.5, stroke: currentFieldColor} })
         } else if (fieldObj.bbox) {
-            shapes.push({id: key, coordinates: fieldObj.bbox})
+            shapes.push({id: key, coordinates: fieldObj.bbox, config: {opacity: 0.5, stroke: currentFieldColor}})
         }
         if (Array.isArray(fieldObj)) {
             for (const [idx, line] of fieldObj.entries()) {
@@ -25,12 +28,14 @@ function makeShapes(data) {
                 if (line.coordinates) {
                     shapes.push({
                         id: shapeId,
-                        coordinates: line.coordinates
+                        coordinates: line.coordinates,
+                        config: {opacity: 0.5, stroke: currentFieldColor}
                     })
                 } else if (line.bbox) {
                     shapes.push({
                         id: shapeId,
-                        coordinates: line.bbox
+                        coordinates: line.bbox,
+                        config: {opacity: 0.5, stroke: currentFieldColor}
                     })
                 }
             }
@@ -82,7 +87,7 @@ function App({config}) {
                 .then(response => response.json())
                 .then(data => {
                     setdocumentData(data)
-                    setShapes(makeShapes(data))
+                    setShapes(makeShapes(data, config.fieldDefaultColor))
                     setLoaded(true)
                 });
         }

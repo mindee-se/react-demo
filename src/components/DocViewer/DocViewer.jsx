@@ -13,24 +13,18 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getSt
                         <AnnotationViewer
                             options={{
                                 enableSelection: false,
-                                selectionRectConfig: {
-                                    fill: fieldDefaultColor,
-                                    opacity: 0.5
-                                },
                                 onMouseLeave: (polygon) => {
                                     const layer = polygon.getLayer()
                                     polygon.setAttr('fill', 'transparent')
                                     layer?.batchDraw()
                                 },
                                 onMouseEnter: (polygon) => {
-                                    const strokeColor = fieldDefaultColor
-                                    polygon.setAttr('fill', strokeColor)
+                                    polygon.setAttr('fill', polygon.getAttr('stroke'))
                                     polygon.setAttr('opacity', 0.5)
                                     polygon.draw()
                                 },
                                 shapeConfig: {
-                                    stroke: fieldDefaultColor,
-                                    strokeWidth: 2,
+                                    strokeWidth: 4,
                                     listening: true,
                                 },
                             }}

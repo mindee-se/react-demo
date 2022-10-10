@@ -11,63 +11,78 @@
     },
     "total_incl": {
       "type": "field",
-      "name": "Total (w. tax)"
+      "name": "Total (w. tax)",
+      "color": "coral"
     },
     "total_excl": {
       "type": "field",
-      "name": "Total (w/o tax)"
+      "name": "Total (w/o tax)",
+      "color": "lavender"
     },
     "invoice_date": {
       "type": "field",
-      "name": "Date"
+      "name": "Date",
+      "color": "gold"
     },
     "invoice_number": {
       "type": "field",
-      "name": "Number"
+      "name": "Number",
+      "color": "mauve"
     },
     "due_date": {
       "type": "field",
-      "name": "Due"
+      "name": "Due",
+      "color": "rgb(162, 215, 219)"
     },
     "taxes": {
       "type": "[:field]",
-      "name": "Taxes"
+      "name": "Taxes",
+      "color": "#00eeff"
     },
     "supplier": {
       "type": "field",
-      "name": "Supplier"
+      "name": "Supplier",
+      "color": "teal"
     },
     "supplier_address": {
       "type": "field",
-      "name": "Locale"
+      "name": "Locale",
+      "color": "orange"
     },
     "customer_name": {
       "type": "field",
-      "name": "Customer"
+      "name": "Customer",
+      "color": "purple"
     },
     "customer_company_registration": {
       "type": "field",
-      "name": "Customer Registration"
+      "name": "Customer Registration",
+      "color": "red"
     },
     "customer_address": {
       "type": "field",
-      "name": "Customer Address"
+      "name": "Customer Address",
+      "color": "grey"
     },
     "payment_details": {
       "type": "[:field]",
-      "name": "Payment Info"
+      "name": "Payment Info",
+      "color": "dark"
     },
     "company_number": {
       "type": "[:field]",
-      "name": "Company Numbers"
+      "name": "Company Numbers",
+      "color": "yellow"
     },
     "total_tax": {
       "type": "field",
-      "name": "Total Tax"
+      "name": "Total Tax",
+      "color": "green"
     },
     "line_items": {
       "type": "[:lineItem]",
       "name": "Line Items",
+      "color": "blue",
       "columns": {
         "item_id": {
           "name": "Item"
