@@ -8,15 +8,27 @@ import DocViewer from "./components/DocViewer/DocViewer";
 import DataViewer from "./components/DataViewer/DataViewer";
 import loaderGIF from "./assets/mindee-logo.gif";
 
-function makeShapes(data, defaultColor) {
+function makeShapes(data, modelConfig) {
     let shapes = []
     for (const [key, fieldObj] of Object.entries(data)) {
-
-        let currentFieldColor = defaultColor;
 
         if(fieldObj == null) {
             continue;
         }
+
+        let currentFieldColor = modelConfig.fieldDefaultColor;
+
+        let currentFieldConfig = null;
+        if(modelConfig.fields.hasOwnProperty(key)){
+            currentFieldConfig = modelConfig.fields[key];
+
+            if(currentFieldConfig.color !== undefined
+            && currentFieldConfig.color !== null
+            && currentFieldConfig.color !== "") {
+                currentFieldColor = currentFieldConfig.color;
+            }
+        }
+
         if (fieldObj.coordinates) {
             shapes.push({id: key, coordinates: fieldObj.coordinates, config: {opacity: 0.5, stroke: currentFieldColor} })
         } else if (fieldObj.bbox) {
@@ -24,18 +36,18 @@ function makeShapes(data, defaultColor) {
         }
         if (Array.isArray(fieldObj)) {
             for (const [idx, line] of fieldObj.entries()) {
-                let shapeId = `line-${idx}`;
+                let shapeId = `${fieldObj}-line-${idx}`;
                 if (line.coordinates) {
                     shapes.push({
                         id: shapeId,
                         coordinates: line.coordinates,
-                        config: {opacity: 0.5, stroke: currentFieldColor}
+                        config: { opacity: 0.5, stroke: currentFieldColor }
                     })
                 } else if (line.bbox) {
                     shapes.push({
                         id: shapeId,
                         coordinates: line.bbox,
-                        config: {opacity: 0.5, stroke: currentFieldColor}
+                        config: { opacity: 0.5, stroke: currentFieldColor }
                     })
                 }
             }
@@ -56,14 +68,30 @@ function App({config}) {
     const setAnnotationViewerStage = (stage) => {
         annotationViewerStageRef.current = stage;
     };
+
     const onFieldMouseEnter = (shapeId) => {
+        let currentFieldColor = config.fieldDefaultColor;
+
+        let currentFieldConfig = null;
+        if(config.fields.hasOwnProperty(shapeId)){
+            currentFieldConfig = config.fields[shapeId];
+
+            if(currentFieldConfig !== undefined
+            && currentFieldConfig.color !== undefined
+            && currentFieldConfig.color !== null
+            && currentFieldConfig.color !== "") {
+                currentFieldColor = currentFieldConfig.color;
+            }
+        }
+
         drawShape(annotationViewerStageRef.current, shapeId, {
-            fill: config.fieldDefaultColor,
+            fill: currentFieldColor,
             opacity: 0.5
         });
-        document.getElementById(shapeId).style.background = config.fieldDefaultColor;
+        document.getElementById(shapeId).style.background = currentFieldColor;
         document.getElementById(shapeId).style.opacity = 0.5;
     };
+
     const onFieldMouseLeave = (shapeId) => {
         setShapeConfig(annotationViewerStageRef.current, shapeId, {
             fill: '',
@@ -87,7 +115,7 @@ function App({config}) {
                 .then(response => response.json())
                 .then(data => {
                     setdocumentData(data)
-                    setShapes(makeShapes(data, config.fieldDefaultColor))
+                    setShapes(makeShapes(data, config))
                     setLoaded(true)
                 });
         }
