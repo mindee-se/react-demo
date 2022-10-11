@@ -12,17 +12,17 @@ function makeShapes(data, modelConfig) {
     let shapes = []
     for (const [key, fieldObj] of Object.entries(data)) {
 
-        if(fieldObj == null) {
+        if (fieldObj === null) {
             continue;
         }
 
         let currentFieldColor = modelConfig.fieldDefaultColor;
 
         let currentFieldConfig = null;
-        if(modelConfig.fields.hasOwnProperty(key)){
+        if (modelConfig.fields.hasOwnProperty(key)) {
             currentFieldConfig = modelConfig.fields[key];
 
-            if(currentFieldConfig.color !== undefined
+            if (currentFieldConfig.color !== undefined
             && currentFieldConfig.color !== null
             && currentFieldConfig.color !== "") {
                 currentFieldColor = currentFieldConfig.color;
@@ -74,11 +74,11 @@ function App({config}) {
 
         let currentFieldConfig = null;
 
-        if(config.fields.hasOwnProperty(shapeId)){
+        if (config.fields.hasOwnProperty(shapeId)) {
             currentFieldConfig = config.fields[shapeId];
         }
         else {
-            for(var field in config.fields) {
+            for (var field in config.fields) {
                 if(shapeId.startsWith(field)){
                     currentFieldConfig = config.fields[field];
                     break;
@@ -86,7 +86,7 @@ function App({config}) {
             }
         }
 
-        if(currentFieldConfig !== undefined
+        if (currentFieldConfig !== undefined
             && currentFieldConfig.color !== undefined
             && currentFieldConfig.color !== null
             && currentFieldConfig.color !== "") {
@@ -164,7 +164,6 @@ function App({config}) {
                             shapes={shapes}
                             onShapeMouseLeft={onShapeMouseLeft}
                             getStage={setAnnotationViewerStage}
-                            fieldDefaultColor={config.fieldDefaultColor}
                         />
                         {
                             loaded ? <DataViewer

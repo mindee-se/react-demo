@@ -4,9 +4,10 @@ import {Table} from "react-bootstrap";
 import loaderGIF from "../../assets/mindee-logo.gif"
 
 function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave) {
-    if(fieldObj == null) {
+    if (fieldObj === null) {
         return;
     }
+
     if (fieldDef.type === "field") {
         let hClass = "form-group row field";
         if (fieldObj.value === "") {
