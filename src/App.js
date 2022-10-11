@@ -36,7 +36,7 @@ function makeShapes(data, modelConfig) {
         }
         if (Array.isArray(fieldObj)) {
             for (const [idx, line] of fieldObj.entries()) {
-                let shapeId = `${fieldObj}-line-${idx}`;
+                let shapeId = `${key}-line-${idx}`;
                 if (line.coordinates) {
                     shapes.push({
                         id: shapeId,
@@ -73,6 +73,7 @@ function App({config}) {
         let currentFieldColor = config.fieldDefaultColor;
 
         let currentFieldConfig = null;
+
         if(config.fields.hasOwnProperty(shapeId)){
             currentFieldConfig = config.fields[shapeId];
 
@@ -82,14 +83,28 @@ function App({config}) {
             && currentFieldConfig.color !== "") {
                 currentFieldColor = currentFieldConfig.color;
             }
+
+            drawShape(annotationViewerStageRef.current, shapeId, {
+                fill: currentFieldColor,
+                opacity: 0.5
+            });
+
+            document.getElementById(shapeId).style.background = currentFieldColor;
+            document.getElementById(shapeId).style.opacity = 0.5;
         }
 
-        drawShape(annotationViewerStageRef.current, shapeId, {
-            fill: currentFieldColor,
-            opacity: 0.5
-        });
-        document.getElementById(shapeId).style.background = currentFieldColor;
-        document.getElementById(shapeId).style.opacity = 0.5;
+        for(var field in config.fields) {
+            if(shapeId.startsWith(field)){
+
+                drawShape(annotationViewerStageRef.current, shapeId, {
+                    fill: currentFieldColor,
+                    opacity: 0.5
+                });
+
+                document.getElementById(shapeId).style.background = currentFieldColor;
+                document.getElementById(shapeId).style.opacity = 0.5;
+            }
+        }
     };
 
     const onFieldMouseLeave = (shapeId) => {
