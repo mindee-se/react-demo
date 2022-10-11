@@ -76,8 +76,17 @@ function App({config}) {
 
         if(config.fields.hasOwnProperty(shapeId)){
             currentFieldConfig = config.fields[shapeId];
+        }
+        else {
+            for(var field in config.fields) {
+                if(shapeId.startsWith(field)){
+                    currentFieldConfig = config.fields[field];
+                    break;
+                }
+            }
+        }
 
-            if(currentFieldConfig !== undefined
+        if(currentFieldConfig !== undefined
             && currentFieldConfig.color !== undefined
             && currentFieldConfig.color !== null
             && currentFieldConfig.color !== "") {
@@ -91,20 +100,6 @@ function App({config}) {
 
             document.getElementById(shapeId).style.background = currentFieldColor;
             document.getElementById(shapeId).style.opacity = 0.5;
-        }
-
-        for(var field in config.fields) {
-            if(shapeId.startsWith(field)){
-
-                drawShape(annotationViewerStageRef.current, shapeId, {
-                    fill: currentFieldColor,
-                    opacity: 0.5
-                });
-
-                document.getElementById(shapeId).style.background = currentFieldColor;
-                document.getElementById(shapeId).style.opacity = 0.5;
-            }
-        }
     };
 
     const onFieldMouseLeave = (shapeId) => {
