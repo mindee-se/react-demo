@@ -2,7 +2,11 @@ import './docViewer.scss'
 import {AnnotationViewer} from "react-mindee-js";
 import {useState} from "react";
 
-function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage, fieldDefaultColor}) {
+const onShapeClicked = (shape) => {
+    document.getElementById(shape.id).scrollIntoView();
+}
+
+function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
         <div className="col-md-5">
@@ -32,6 +36,7 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getSt
                             data={{image: images[activeImage], shapes: shapes[activeImage]}}
                             onShapeMouseEnter={onShapeMouseEntered}
                             onShapeMouseLeave={onShapeMouseLeft}
+                            onShapeClick={onShapeClicked}
                             getStage={getStage}
                         />
                     }
