@@ -2,7 +2,7 @@ import './docViewer.scss'
 import {AnnotationViewer} from "react-mindee-js";
 import {useState} from "react";
 
-function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage}) {
+function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getStage, fieldDefaultColor}) {
     const [activeImage, setActiveImage] = useState(0)
     return (
         <div className="col-md-5">
@@ -13,23 +13,18 @@ function DocViewer({images, shapes, onShapeMouseEntered, onShapeMouseLeft, getSt
                         <AnnotationViewer
                             options={{
                                 enableSelection: false,
-                                selectionRectConfig: {
-                                    fill: 'rgba(0,0,255,0.5)',
-                                },
                                 onMouseLeave: (polygon) => {
                                     const layer = polygon.getLayer()
                                     polygon.setAttr('fill', 'transparent')
                                     layer?.batchDraw()
                                 },
                                 onMouseEnter: (polygon) => {
-                                    const stroke = polygon.getAttr('stroke')
-                                    polygon.setAttr('fill', `${stroke}40`)
+                                    polygon.setAttr('fill', polygon.getAttr('stroke'))
+                                    polygon.setAttr('opacity', 0.5)
                                     polygon.draw()
                                 },
                                 shapeConfig: {
-                                    stroke: '#ff0000',
-                                    strokeWidth: 0,
-                                    fill: 'rgba(0,51,255,0.22)',
+                                    strokeWidth: 4,
                                     listening: true,
                                 },
                             }}

@@ -4,6 +4,10 @@ import {Table} from "react-bootstrap";
 import loaderGIF from "../../assets/mindee-logo.gif"
 
 function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, onFieldMouseLeave) {
+    if (fieldObj === null) {
+        return;
+    }
+
     if (fieldDef.type === "field") {
         let hClass = "form-group row field";
         if (fieldObj.value === "") {
@@ -36,12 +40,13 @@ function renderField(key, fieldObj, activeFeature, fieldDef, onFieldMouseEnter, 
     } else if (fieldDef.type === "[:lineItem]") {
         return <div className="line-items">
             {fieldDef.name ? <b>{fieldDef.name}:</b> : ""}
-            {renderLineItems(fieldObj, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave)}
+            {renderLineItems(fieldObj, key, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave)}
         </div>
     }
 }
 
-function renderLineItems(lineItems, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave) {
+function renderLineItems(lineItems, key, fieldDef, activeFeature, onFieldMouseEnter, onFieldMouseLeave) {
+
     return <Table className="lineItems mt-1" striped hover>
         <thead>
         <tr>
@@ -53,10 +58,10 @@ function renderLineItems(lineItems, fieldDef, activeFeature, onFieldMouseEnter, 
         <tbody>
         {lineItems.map((obj, idx) =>
             <tr
-                id={`line-${idx}`}
+                id={`${key}-line-${idx}`}
                 className={activeFeature === `line-${idx}` ? "line-item active" : "line-item"}
-                onMouseEnter={() => onFieldMouseEnter(`line-${idx}`)}
-                onMouseLeave={() => onFieldMouseLeave(`line-${idx}`)}
+                onMouseEnter={() => onFieldMouseEnter(`${key}-line-${idx}`)}
+                onMouseLeave={() => onFieldMouseLeave(`${key}-line-${idx}`)}
             >
                 {Object.keys(fieldDef.columns).map(function(key) {
                     return <td>{obj[key].value}</td>
