@@ -1,4 +1,4 @@
-# Client Base for React
+# Front-End Demo Using React
 
 ## Configuration
 The React application is configured by the server.
